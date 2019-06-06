@@ -29,7 +29,7 @@ let profesores=[{nombre:"juan",apellido:"cantero",telefono:"3205214875"},
                 {nombre:"pedro",apellido:"cantero",telefono:"321456789"},
  ]
 
-res.send("profesores")
+res.send(profesores)
 })
 
 app.get("/asistencia", (req,res )=>{
