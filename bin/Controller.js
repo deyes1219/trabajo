@@ -6,7 +6,7 @@ constructor(){
 async connect(){
 try{
     await mongoose.connect(
-        "mongodb+srv://genangdei:ProgramWeb123*@cluster0-hmtkv.mongodb.net/trabajo?retryWrites=true&w=majority",
+        "mongodb+srv://deyes:a1b2c3d4@cluster0-yg4ca.mongodb.net/trabajo?retryWrites=true&w=majority",
         {useNewUrlParser:true}
     );
     console.log("conectados a la base de datos")

@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const controller= require("./Controller")
+const bodyParser= require("body-parser")
+app.use(bodyParser.json());
 
 app.get("/", (req,res )=>{
     res.send("Toma de Asistencia");
@@ -55,4 +57,10 @@ let acudientes=[{nombre:"mario",apellido:"perez",telefono:"3205214875"},
 
 res.send("acudientes")
 })
+
+app.post("/estudiantes",(req, res)=>{
+    console.log(req.body);
+    res.send("ok");
+})
 exports.app = app;
+
