@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Acudientes=require("./models/Acudientes")
 class Controller{
 constructor(){
     this.connect();
@@ -10,10 +11,16 @@ try{
         {useNewUrlParser:true}
     );
     console.log("conectados a la base de datos")
-
-}catch(e){
+    }catch(e){
     console.error(e)
-}
-}
-}
+        }
+    }
+        getAcudientes(res){
+            Acudientes.find({}, (err, acudientes)=>{
+                if(err) throw err;
+                res.send(acudientes);
+
+            })
+        }
+    }
 exports.controller=new Controller()

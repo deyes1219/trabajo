@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const controller= require("./Controller")
+const {controller}= require("./Controller")
 const bodyParser= require("body-parser")
 app.use(bodyParser.json());
 
@@ -14,7 +14,7 @@ let estudiantes=[{nombre:"genesis",apellido:"canterp",tipoid:"ti",curso:"5",id_a
                 {nombre:"angelica",apellido:"romero",tipoid:"ti",curso:"4",id_acudientes:0002},
  ]
 
-res.send("estudiantes")
+res.send(estudiantes)
 })
 
 app.get("/materias", (req,res )=>{
@@ -23,7 +23,7 @@ let estudiantes=[{nombre:"programacion web",in_horaria:"2"},
                 {nombre:"algoritmia",in_horaria:"2"},
  ]
 
-res.send("materias")
+res.send(materias)
 })
 
 app.get("/profesores", (req,res )=>{
@@ -39,7 +39,7 @@ app.get("/asistencia", (req,res )=>{
 let asistencia=[{asistencia:"2",inasistecia:"4",fecha_asistenci:"2/09/2019"},
  ]
 
-res.send("asistencia")
+res.send(asistencia)
 })
 
 
@@ -47,15 +47,17 @@ app.get("/listados", (req,res )=>{
 let listados=[{fecha:"2/09/2019",id_materias:"4"},
  ]
 
-res.send("listados")
+res.send(listados)
 })
 
 
 app.get("/acudientes", (req,res )=>{
-let acudientes=[{nombre:"mario",apellido:"perez",telefono:"3205214875"},
+/*let acudientes=[
+    {nombre:"mario",apellido:"perez",telefono:"3205214875"},
  ]
 
-res.send("acudientes")
+res.send(acudientes)*/
+controller.getAcudientes(res);
 })
 
 app.post("/estudiantes",(req, res)=>{
