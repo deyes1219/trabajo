@@ -7,47 +7,20 @@ app.use(bodyParser.json());
 app.get("/", (req,res )=>{
     res.send("Toma de Asistencia");
 })
-
-app.get("/estudiantes", (req,res )=>{
-let estudiantes=[{nombre:"genesis",apellido:"canterp",tipoid:"ti",curso:"5",id_acudientes:0001},
-
-                {nombre:"angelica",apellido:"romero",tipoid:"ti",curso:"4",id_acudientes:0002},
- ]
-
-res.send(estudiantes)
-})
-
 app.get("/materias", (req,res )=>{
-let estudiantes=[{nombre:"programacion web",in_horaria:"2"},
-
-                {nombre:"algoritmia",in_horaria:"2"},
- ]
-
-res.send(materias)
+    controller.getMaterias(res);
 })
 
-app.get("/profesores", (req,res )=>{
-let profesores=[{nombre:"juan",apellido:"cantero",telefono:"3205214875"},
-
-                {nombre:"pedro",apellido:"cantero",telefono:"321456789"},
- ]
-
-res.send(profesores)
+app.get("/profesor", (req,res )=>{
+    controller.getProfesores(res);
 })
 
-app.get("/asistencia", (req,res )=>{
-let asistencia=[{asistencia:"2",inasistecia:"4",fecha_asistenci:"2/09/2019"},
- ]
-
-res.send(asistencia)
+app.get("/asistencias", (req,res )=>{
+ controller.getAsistencias(res);
 })
-
 
 app.get("/listados", (req,res )=>{
-let listados=[{fecha:"2/09/2019",id_materias:"4"},
- ]
-
-res.send(listados)
+        controller.getListados(res);
 })
 
 
@@ -60,9 +33,27 @@ res.send(acudientes)*/
 controller.getAcudientes(res);
 })
 
-app.post("/estudiantes",(req, res)=>{
-    console.log(req.body);
+app.get("/estudiantes", (req,res )=>{
+/*let estudiantes=[{nombre:"genesis",apellido:"canterp",tipoid:"ti",curso:"5",id_acudientes:0001},
+
+                {nombre:"angelica",apellido:"romero",tipoid:"ti",curso:"4",id_acudientes:0002},
+ ]*/
+ controller.getEstudiantes(res);
+})
+
+app.get("/asistencias/:inasistencias",(req,res )=>{
+    let inasistencias = req.params.inasistencias;
+    console.log(inasistencias);
     res.send("ok");
 })
+
+app.get("/asistencias/:fecha/:inasistencias",(req,res )=>{
+    let inasistencias = req.params.inasistencias;
+    console.log(inasistencias);
+    res.send("ok2");
+})
+
+
+
 exports.app = app;
 

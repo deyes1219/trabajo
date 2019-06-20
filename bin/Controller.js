@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
-const Acudientes=require("./models/Acudientes")
+const Acudientes=require("./models/Acudientes");
+const Profesores=require("./models/Profesores");
+const Materias=require("./models/Materias");
+const Listados=require("./models/Listados");
+const Asistencias=require("./models/Asistencias");
+const Estudiantes=require("./models/Estudiantes");
+
+
+
 class Controller{
 constructor(){
     this.connect();
@@ -15,10 +23,52 @@ try{
     console.error(e)
         }
     }
-        getAcudientes(res){
+ getAcudientes(res){
             Acudientes.find({}, (err, acudientes)=>{
                 if(err) throw err;
                 res.send(acudientes);
+
+            })
+        }
+
+ getProfesores(res){
+            Profesores.find({}, (err, profesores)=>{
+                if(err) throw err;
+                res.send(profesores);
+
+            })
+        }
+
+getAsistencias(res){
+    Asistencias.find({}).
+    populate('Estudiantes').
+    exec( (err, asistencias)=>{
+        if(err) throw err;
+        res.send(asistencias);
+    })
+}
+
+getEstudiantes(res){
+            Estudiantes.find({}, (err, estudiantes)=>{
+                if(err) throw err;
+
+                res.send(estudiantes);
+
+            })
+        }
+
+getMaterias(res){
+            Materias.find({}, (err, materias)=>{
+                if(err) throw err;
+                res.send(materias);
+
+            })
+        }
+
+getListados(res){
+            Listados.find({}, (err, listados)=>{
+                if(err) throw err;
+                res.send(listados);
 
             })
         }
