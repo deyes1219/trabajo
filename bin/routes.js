@@ -68,5 +68,15 @@ app.put("/estudiantes/:id", function(req, res) {
     estudiantes.id=req.params.id;
     console.log(params);
     controller.updateEstudiante(estudiante,res);
+
 });
+
+//eliminar  usuario
+app.delete("/estudiantes/:id", function(req,res){
+let { id } = req.params;
+controller.deleteEstudiantes(id,res);
+});
+
+
+
 exports.app = app;

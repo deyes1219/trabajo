@@ -100,19 +100,30 @@ getListados(res){
             })
         }
 
-updateEstudiante(estudiante,res){
-let {nombre, apellido } = estudiante;
+updateEstudiantes(estudiante,res){
+    //optenemos los datos queremos actualizar//
+    let { nombre, apellido } = estudiante;
 
-    Estudiante.updateOne(
-        { _id: id },
-        { $set : { nombre: nombre, apellido: apellido }
-        }),
+    estudiantes.updateOne(
+    {_id: id},
+    { $set: {nombre: nombre, apellido: apellido}}
+    )
 
-    .then(rawResponse => {
-        res.send({ message: "Estudiante updated", raw: rawResponse
-    })
-    .catch(err => {
-        if (err) throw err ;
+.then(rawResponse => {
+    res.send({ message:"Estudiante update",raw: rawResponse})
+})
+
+.catch(err =>{
+if(err) throw err;
+
+});
+}
+
+deleteEstudiante(id,res){
+    Estudiante.deleteOne({_id: id},function(err){
+        if(err)throw err;
+        res.send({message:"Estudiante has been deleted"});
     });
-},
-exports.controller=new Controller();
+}
+}
+exports.controller = new Controller()
