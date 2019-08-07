@@ -1,4 +1,4 @@
 const { app }= require("./bin/routes");
-app.listen(3024,()=>{
+app.listen(27017,()=>{
     console.log('servidor on')
 })
