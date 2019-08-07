@@ -30,7 +30,13 @@ try{
 
             })
         }
+ getAsistencias(res){
+            Asistencias.find({}, (err, asistencias)=>{
+                if(err) throw err;
+                res.send(asistencias);
 
+            })
+        }
  getProfesores(res){
             Profesores.find({}, (err, profesores)=>{
                 if(err) throw err;
@@ -39,7 +45,7 @@ try{
             })
         }
 
-getAsistencias(res){
+getAsistenciasPorEstudiantes(res){
     Asistencias.find({}).
     populate('Estudiantes').
     exec( (err, asistencias)=>{
@@ -47,6 +53,22 @@ getAsistencias(res){
         res.send(asistencias);
     })
 }
+getAsistenciasPor(res){
+    Asistencias.find({fecha:25022019}).
+    populate({model:"Estudiantes",path:"_id",select:"nombre apellido _idacudiente"}).
+    exec( (err, asistencias)=>{
+        if(err) throw err;
+        res.send(Asistencias);
+    })
+}
+
+setEstudiantes(estudiantes, res) {
+    Estudiantes.create(estudiantes, function(err, newEstudiantes) {
+        if (err) throw err;
+        res.send({ status: 200, nE: newEstudiantes});
+    });
+}
+
 
 getEstudiantes(res){
             Estudiantes.find({}, (err, estudiantes)=>{
@@ -56,7 +78,12 @@ getEstudiantes(res){
 
             })
         }
-
+getEstudiante(id, res){
+    Estudiantes.find({_id:id}, (err, estudiante)=>{
+        if(err) throw err;
+        res.send({Estudiante: estudiante})
+    });
+}
 getMaterias(res){
             Materias.find({}, (err, materias)=>{
                 if(err) throw err;
@@ -72,5 +99,20 @@ getListados(res){
 
             })
         }
-    }
-exports.controller=new Controller()
+
+updateEstudiante(estudiante,res){
+let {nombre, apellido } = estudiante;
+
+    Estudiante.updateOne(
+        { _id: id },
+        { $set : { nombre: nombre, apellido: apellido }
+        }),
+
+    .then(rawResponse => {
+        res.send({ message: "Estudiante updated", raw: rawResponse
+    })
+    .catch(err => {
+        if (err) throw err ;
+    });
+},
+exports.controller=new Controller();

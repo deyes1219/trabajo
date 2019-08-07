@@ -4,6 +4,11 @@ const {controller}= require("./Controller")
 const bodyParser= require("body-parser")
 app.use(bodyParser.json());
 
+app.post("/estudiantes", function(req, res) {
+    let { estudiantes } = req.body;
+    controller.setEstudiantes(estudiantes, res);
+});
+
 app.get("/", (req,res )=>{
     res.send("Toma de Asistencia");
 })
@@ -11,7 +16,7 @@ app.get("/materias", (req,res )=>{
     controller.getMaterias(res);
 })
 
-app.get("/profesor", (req,res )=>{
+app.get("/profesores", (req,res )=>{
     controller.getProfesores(res);
 })
 
@@ -39,12 +44,16 @@ app.get("/estudiantes", (req,res )=>{
                 {nombre:"angelica",apellido:"romero",tipoid:"ti",curso:"4",id_acudientes:0002},
  ]*/
  controller.getEstudiantes(res);
-})
-
+});
+//Traer a un usuario
+app.get("/estudiantes/:id", function(req,res){
+let{id}=req.params;
+controller.getEstudiante(id, res);
+});
 app.get("/asistencias/:inasistencias",(req,res )=>{
     let inasistencias = req.params.inasistencias;
     console.log(inasistencias);
-    res.send("ok");
+    controller.getAsistencias(res)
 })
 
 app.get("/asistencias/:fecha/:inasistencias",(req,res )=>{
@@ -53,7 +62,11 @@ app.get("/asistencias/:fecha/:inasistencias",(req,res )=>{
     res.send("ok2");
 })
 
-
-
+//actualizar a un usuario
+app.put("/estudiantes/:id", function(req, res) {
+ let estudiantes = req.body.estudiantes;
+    estudiantes.id=req.params.id;
+    console.log(params);
+    controller.updateEstudiante(estudiante,res);
+});
 exports.app = app;
-

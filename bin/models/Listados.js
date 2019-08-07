@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ListadosSchema = new Schema({
-  
+
   id_profesor:[
     {
       type: Schema.Types.ObjectId,
@@ -18,5 +18,5 @@ const ListadosSchema = new Schema({
   fecha:Date
 });
 
-var Listados = mongoose.model("Listados", ListadosSchema);
+var Listados = mongoose.model("listados", ListadosSchema);
 module.exports = Listados;

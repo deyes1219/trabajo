@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const AsistenciasSchema = new Schema({
   asistencia: Number,
   inasistencias: Number,
-  fecha_asistencia: String,
+  fecha: Date,
 
   id_Estudiantes:[
     {
